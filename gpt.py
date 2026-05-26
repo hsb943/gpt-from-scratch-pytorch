@@ -1,6 +1,11 @@
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
+from pathlib import Path
+
+DATA_DIR = Path("data")
+OUTPUT_DIR = Path("outputs")
+OUTPUT_DIR.mkdir(exist_ok=True)
 
 # hyperparameters
 batch_size = 64 # how many independent sequences will we process in parallel?
@@ -19,7 +24,7 @@ dropout = 0.2
 torch.manual_seed(1337)
 
 # wget https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt
-with open('input.txt', 'r', encoding='utf-8') as f:
+with open(DATA_DIR / 'input.txt', 'r', encoding='utf-8') as f:
     text = f.read()
 
 # here are all the unique characters that occur in this text
@@ -213,7 +218,7 @@ for iter in range(max_iters):
         context = torch.zeros((1, 1), dtype=torch.long, device=device)
         sample = decode(m.generate(context, max_new_tokens=500)[0].tolist())
 
-        with open(f"sample_step_{iter}.txt", "w", encoding="utf-8") as f:
+        with open(OUTPUT_DIR / f"sample_step_{iter}.txt", "w", encoding="utf-8") as f:
             f.write(sample)
 
     # sample a batch of data
@@ -228,4 +233,5 @@ for iter in range(max_iters):
 # generate from the model
 context = torch.zeros((1, 1), dtype=torch.long, device=device)
 print(decode(m.generate(context, max_new_tokens=500)[0].tolist()))
-open('more.txt', 'w').write(decode(m.generate(context, max_new_tokens=2000)[0].tolist()))
+with open(OUTPUT_DIR / 'more.txt', 'w', encoding='utf-8') as f:
+    f.write(decode(m.generate(context, max_new_tokens=2000)[0].tolist()))

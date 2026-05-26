@@ -101,11 +101,21 @@ The goal was to study whether a relatively small transformer trained from scratc
 # 5. Project Structure
 
 ```text
-gpt.py                  -> Transformer architecture + training loop
-input.txt               -> Training corpus
-more.txt                -> Final generated output
-sample_step_*.txt       -> Intermediate generated outputs
-README.md               -> Project documentation
+gpt-from-scratch-pytorch/
+|-- README.md
+|-- LICENSE
+|-- .gitignore
+|-- gpt.py
+|-- data/
+|   `-- input.txt
+|-- outputs/
+|   |-- more.txt
+|   |-- sample_step_0.txt
+|   |-- sample_step_500.txt
+|   |-- sample_step_1000.txt
+|   `-- ...
+`-- images/
+    `-- loss_curve.png
 ```
 
 ---
