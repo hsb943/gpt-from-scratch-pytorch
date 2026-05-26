@@ -155,6 +155,10 @@ step 4999 -> train loss 0.70
 
 This demonstrates that the transformer successfully learned statistical language structure from the training corpus.
 
+### Training Loss Curve
+
+![GPT Training Loss Curve](images/loss_curve.png)
+
 ---
 
 ## 7.2 Example Generated Outputs
